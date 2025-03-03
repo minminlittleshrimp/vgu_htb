@@ -1,0 +1,8 @@
+
+services:
+  hidden_shell:
+    platform: linux/amd64
+    build: 
+      context: .
+    ports:
+      - "13402:1337"

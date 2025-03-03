@@ -1,0 +1,6 @@
+services:
+    baby_overflow:
+      build: .
+      ports:
+        - "1338:1338"
+  
