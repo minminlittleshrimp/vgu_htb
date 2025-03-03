@@ -1,0 +1,5 @@
+services:
+  cowsay:
+    build: .
+    ports:
+      - "13400:13400"

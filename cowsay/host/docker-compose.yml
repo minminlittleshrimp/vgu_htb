@@ -1,0 +1,5 @@
+services:
+  cowsay:
+    build: .
+    ports:
+      - "1339:1339"
