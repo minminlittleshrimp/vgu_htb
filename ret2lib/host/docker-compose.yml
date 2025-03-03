@@ -1,8 +1,7 @@
-
 services:
-  hidden_shell:
+  ret2lib:
     platform: linux/amd64
     build:
       context: .
     ports:
-      - "13404:1337"
+      - "1335:1335"

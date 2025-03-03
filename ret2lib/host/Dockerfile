@@ -37,4 +37,4 @@ USER ctfuser
 EXPOSE 1337
 
 # Run the challenge with socat to expose it over TCP
-ENTRYPOINT ["socat", "TCP-LISTEN:1337,fork", "EXEC:/home/ctfuser/app/vanished_shell"]
+ENTRYPOINT ["socat", "TCP-LISTEN:1335,fork", "EXEC:/home/ctfuser/app/vanished_shell"]

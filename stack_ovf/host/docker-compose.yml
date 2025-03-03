@@ -1,6 +1,5 @@
-
 services:
-  hidden_shell:
+  stack_ovf:
     platform: linux/amd64
     build: 
       context: .
