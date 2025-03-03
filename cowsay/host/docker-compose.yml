@@ -1,5 +1,7 @@
 services:
   cowsay:
-    build: .
+    platform: linux/amd64
+    build:
+      context: .
     ports:
       - "1339:1339"

@@ -22,6 +22,6 @@ RUN ln -s /usr/games/cowsay /usr/local/bin/cowsay
 
 USER ctfuser
 
-EXPOSE 13400
+EXPOSE 1339
 
-ENTRYPOINT ["socat", "TCP-LISTEN:13400,fork", "EXEC:python3 /home/ctfuser/app/cowsay.py"]
+ENTRYPOINT ["socat", "TCP-LISTEN:1339,fork", "EXEC:python3 /home/ctfuser/app/cowsay.py"]
