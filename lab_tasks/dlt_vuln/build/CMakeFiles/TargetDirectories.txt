@@ -1,0 +1,3 @@
+/home/drmint/work/vgu_ethical_hacking/lab_tasks/dlt_vuln/build/CMakeFiles/dlt_vuln.dir
+/home/drmint/work/vgu_ethical_hacking/lab_tasks/dlt_vuln/build/CMakeFiles/edit_cache.dir
+/home/drmint/work/vgu_ethical_hacking/lab_tasks/dlt_vuln/build/CMakeFiles/rebuild_cache.dir
