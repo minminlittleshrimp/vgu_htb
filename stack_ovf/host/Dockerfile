@@ -1,8 +1,11 @@
 FROM ubuntu:20.04
 
-RUN apt-get update && apt-get install -y \
+RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y \
     build-essential \
-    socat && \
+    gcc-multilib \
+    libc6-dev-i386 \
+    socat \
+    g++-multilib && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user
@@ -21,7 +24,7 @@ WORKDIR /home/ctfuser/app
 COPY stack_ovf.c /home/ctfuser/app/
 
 # Compile the challenge program without RELRO
-RUN gcc -no-pie -fno-pie -fno-stack-protector -z execstack -Wl,-z,norelro -o stack_ovf stack_ovf.c && \
+RUN gcc -m32 -z relro -fno-stack-protector -z noexecstack -O0 -no-pie stack_ovf.c -o stack_ovf && \
     chown root:ctfuser /home/ctfuser/app/stack_ovf && \
     chmod 750 /home/ctfuser/app/stack_ovf && \
     chmod 550 /home/ctfuser/app

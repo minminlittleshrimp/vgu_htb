@@ -32,7 +32,7 @@ RUN rm /home/ctfuser/app/hidden_shell_2.c
 USER ctfuser
 
 # Expose port for the challenge
-EXPOSE 1337
+EXPOSE 1336
 
 # Run the challenge with socat to expose it over TCP
-ENTRYPOINT ["socat", "TCP-LISTEN:1337,fork", "EXEC:/home/ctfuser/app/hidden_shell_2"]
+ENTRYPOINT ["socat", "TCP-LISTEN:1336,fork", "EXEC:/home/ctfuser/app/hidden_shell_2"]

