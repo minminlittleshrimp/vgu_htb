@@ -1,2 +1,2 @@
 all:
-	gcc -Wl,-z,norelro -no-pie -O0 -fno-stack-protector stack_ovf.c -o stack_ovf 
+	gcc -m32 -z relro -fno-stack-protector -z noexecstack -no-pie -w -o stack_ovf stack_ovf.c

