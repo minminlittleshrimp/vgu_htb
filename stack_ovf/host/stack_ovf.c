@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-int hidden() {
-    printf("You win! Here is your shell:\n");
-    system("/bin/sh");
+void hidden() {
+    system("/bin/bash");
 }
 
-int vulnerable() {
-    char buffer[60] = {0};
-    printf("Enter some input: ");
-    fflush(stdout); // Flush to ensure the prompt is sent immediately
-    fgets(buffer, 100, stdin); // Vulnerable function
+void vulnerable() {
+    char buffer[32]; // Small buffer on the stack
+
+    printf("Enter your input: ");
+    fflush(stdout);
+    gets(buffer); // Unsafe function, vulnerable to buffer overflow
+
     printf("You entered: %s\n", buffer);
 }
 
 int main() {
-    printf("Welcome to the Stack Overflow Challenge!\n");
     vulnerable();
     return 0;
 }
