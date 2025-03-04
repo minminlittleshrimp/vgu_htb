@@ -11,9 +11,9 @@ context(arch="amd64", endian='el', os="linux")
 context.log_level = "debug"
 
 if args.mode in ["d", "debug"]:
-    atk = process('./vanish_shell')
+    atk = process('./heap_ovf')
     #libc = ELF('/lib/x86_64-linux-gnu/libc.so.6', checksec=False)
-    chall = ELF('./vanish_shell', checksec=True)
+    chall = ELF('./heap_ovf', checksec=True)
 else:
     atk = remote('localhost', 1335)
     #libc = ELF('/lib/x86_64-linux-gnu/libc.so.6', checksec=False)
