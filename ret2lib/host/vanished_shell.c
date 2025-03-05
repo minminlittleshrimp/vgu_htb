@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     printf("checksec for you babe:\n");
     printf("Arch:     i386-32-little\n");
     printf("RELRO:    Full RELRO\n");
-    printf("Stack:    Canary found\n");
+    printf("Stack:    No canary found\n");
     printf("NX:       NX enabled\n");
     printf("PIE:      PIE enabled\n");
     printf("ASLR      Disabled\n");
