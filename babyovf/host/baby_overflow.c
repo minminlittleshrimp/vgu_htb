@@ -17,7 +17,7 @@ int main() {
         }
 
         if (flag) {
-            printf("Congratulations! You've found the flag: vgucypher{bAb3_bAb3_ov3rfl0w}\n");
+            printf("Congratulations! You've found the flag: vgu_eth_hacking{bAb3_bAb3_ov3rfl0w}\n");
         } else {
             printf("Access denied! Try again.\n");
         }
