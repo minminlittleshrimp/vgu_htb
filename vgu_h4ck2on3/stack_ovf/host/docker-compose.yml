@@ -1,0 +1,7 @@
+services:
+  stack_ovf:
+    platform: linux/amd64
+    build: 
+      context: .
+    ports:
+      - "1337:1337"

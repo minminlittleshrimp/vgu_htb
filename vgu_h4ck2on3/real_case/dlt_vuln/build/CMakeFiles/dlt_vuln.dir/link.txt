@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/dlt_vuln.dir/dlt_vuln.c.o -o dlt_vuln  -ldlt -lrt -lpthread 

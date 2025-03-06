@@ -1,0 +1,4 @@
+[submodule "dlt-daemon"]
+	path = dlt-daemon
+	url = https://github.com/COVESA/dlt-daemon.git
+	branch = dlt_devel_locking_redefinition
