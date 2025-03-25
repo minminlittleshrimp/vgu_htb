@@ -719,7 +719,7 @@ DltReturnValue dlt_init_common(void)
     uint32_t header_size = 0;
 
     /* Binary semaphore for threads */
-    if (sem_init(&dlt_mutex, 0, 1) == -1) {
+    if (sem_init(&dlt_mutex, 1, 1) == -1) {
         dlt_user_init_state = INIT_UNITIALIZED;
         return DLT_RETURN_ERROR;
     }
@@ -909,6 +909,7 @@ DltReturnValue dlt_init_common(void)
 
 void dlt_user_atexit_handler(void)
 {
+    printf("%s called\n", __FUNCTION__);
     /* parent will do clean-up */
     if (g_dlt_is_child)
         return;
@@ -937,7 +938,7 @@ void dlt_user_atexit_handler(void)
 
 int dlt_user_atexit_blow_out_user_buffer(void)
 {
-
+    printf("%s called\n", __FUNCTION__);
     int count, ret;
     struct timespec ts;
 
@@ -1000,6 +1001,7 @@ static void dlt_user_free_buffer(unsigned char **buffer)
 
 DltReturnValue dlt_free(void)
 {
+    printf("%s called\n", __FUNCTION__);
     uint32_t i;
     int ret = 0;
     int expected = 0;
@@ -1117,7 +1119,6 @@ DltReturnValue dlt_free(void)
 
     /* Ignore return value */
     DLT_SEM_LOCK();
-
     dlt_user_free_buffer(&(dlt_user.resend_buffer));
     dlt_buffer_free_dynamic(&(dlt_user.startup_buffer));
 
@@ -1159,6 +1160,7 @@ DltReturnValue dlt_free(void)
     }
 
     dlt_env_free_ll_set(&dlt_user.initial_ll_set);
+    printf("Right before sem_post!\n", __FUNCTION__);
     DLT_SEM_FREE();
 
 #ifdef DLT_NETWORK_TRACE_ENABLE
@@ -1184,6 +1186,7 @@ DltReturnValue dlt_free(void)
 
     pthread_cond_destroy(&mq_init_condition);
 #endif /* DLT_NETWORK_TRACE_ENABLE */
+printf("Right before sem_destroy!\n", __FUNCTION__);
     sem_destroy(&dlt_mutex);
 
     /* allow the user app to do dlt_init() again. */
@@ -1554,6 +1557,7 @@ DltReturnValue dlt_register_context_llccb(DltContext *handle,
  * still data in startup_buffer. atexit_handler will free the appIDs */
 DltReturnValue dlt_unregister_app_util(bool force_sending_messages)
 {
+    printf("%s called\n", __FUNCTION__);
     DltReturnValue ret = DLT_RETURN_OK;
 
     /* forbid dlt usage in child after fork */
@@ -1818,6 +1822,7 @@ DltReturnValue dlt_user_log_write_start_internal(DltContext *handle,
                                            uint32_t messageid,
                                            bool is_verbose)
 {
+    printf("%s called\n", __FUNCTION__);
     int ret = DLT_RETURN_TRUE;
 
     /* check nullpointer */
@@ -5097,6 +5102,7 @@ int dlt_start_threads()
 
 void dlt_stop_threads()
 {
+    printf("%s called\n", __FUNCTION__);
     int dlt_housekeeperthread_result = 0;
     int joined = 0;
 
@@ -5177,10 +5183,12 @@ static void dlt_fork_child_fork_handler()
 DltReturnValue dlt_user_log_out_error_handling(void *ptr1, size_t len1, void *ptr2, size_t len2, void *ptr3,
                                                size_t len3)
 {
+    printf("%s called\n", __FUNCTION__);
     DltReturnValue ret = DLT_RETURN_ERROR;
     size_t msg_size = len1 + len2 + len3;
 
     DLT_SEM_LOCK();
+    printf("Check buffer size!\n");
     ret = dlt_buffer_check_size(&(dlt_user.startup_buffer), (int)msg_size);
     DLT_SEM_FREE();
 

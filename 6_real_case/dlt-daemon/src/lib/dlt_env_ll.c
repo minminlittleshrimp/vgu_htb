@@ -306,6 +306,7 @@ int dlt_env_init_ll_set(dlt_env_ll_set *const ll_set)
  */
 void dlt_env_free_ll_set(dlt_env_ll_set *const ll_set)
 {
+    printf("%s called\n", __FUNCTION__);
     if (!ll_set) {
         return;
     }
@@ -496,5 +497,3 @@ int dlt_env_adjust_ll_from_env(dlt_env_ll_set const *const ll_set,
 
     return res;
 }
-
-

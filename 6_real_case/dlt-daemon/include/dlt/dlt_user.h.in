@@ -110,12 +110,24 @@ extern "C" {
 #   define DLT_USER_RESENDBUF_MAX_SIZE (DLT_USER_BUF_MAX_SIZE + 100)    /**< Size of resend buffer; Max DLT message size is 1390 bytes plus some extra header space  */
 
 /* Use a semaphore or mutex from your OS to prevent concurrent access to the DLT buffer. */
-#define DLT_SEM_LOCK() do{\
+#define DLT_SEM_LOCK() do { \
+    int value; \
+    sem_getvalue(&dlt_mutex, &value); \
+    printf("[LOCK] Before sem_wait: sem value = %d\n", value); \
     while ((sem_wait(&dlt_mutex) == -1) && (errno == EINTR)) \
-        continue;       /* Restart if interrupted */ \
-    } while(false)
-#define DLT_SEM_FREE() { sem_post(&dlt_mutex); }
+        continue; \
+    sem_getvalue(&dlt_mutex, &value); \
+    printf("[LOCK] After sem_wait: sem value = %d\n", value); \
+} while(0)
 
+#define DLT_SEM_FREE() do { \
+    int value; \
+    sem_getvalue(&dlt_mutex, &value); \
+    printf("[FREE] Before sem_post: sem value = %d\n", value); \
+    sem_post(&dlt_mutex); \
+    sem_getvalue(&dlt_mutex, &value); \
+    printf("[FREE] After sem_post: sem value = %d\n", value); \
+} while(0)
 /**
  * This structure is used for every context used in an application.
  */
